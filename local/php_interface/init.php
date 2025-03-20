@@ -10,10 +10,13 @@ foreach ([
     }
 }
 
-//if(file_exists(__DIR__.'/classes/Otus/autoload.php')){
-//    require_once __DIR__.'/classes/Otus/autoload.php';
-//}
-//
-//if(file_exists(__DIR__.'/../vendor/autoload.php')){
-//    require_once __DIR__.'/../vendor/autoload.php';
-//}
+CModule::AddAutoloadClasses(
+    '', // не указываем имя модуля
+    [
+        'Models\\SmartPhoneTable' => '/local/app/Models/SmartPhoneTable.php',
+    ]
+);
+
+
+// Повесить событие на добавление HL записи
+//\Bitrix\Main\EventManager::getInstance()->addEventHandler('', 'ColorsOnAdd', ['Otus\HL\Handlers', 'onColorAdd']);
