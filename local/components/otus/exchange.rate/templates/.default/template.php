@@ -1,7 +1,25 @@
 <?php
+
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 use Bitrix\Main\Localization\Loc;
+Loc::loadMessages(__FILE__);
 ?>
+
+<div class="ui-toolbar">
+<form action="" method="get">
+    <div class="ui-ctl ui-ctl-after-icon ui-ctl-dropdown">
+        <div class="ui-ctl-after ui-ctl-icon-angle"></div>
+        <select class="ui-ctl-element" name="CURRENCY">
+            <?php foreach ($arResult['CurrencyLang'] as $currency):?>
+            <option value="<?=$currency['CURRENCY']?>" <?php if($arResult['GET']==$currency['CURRENCY']):?>selected="selected"<?php endif;?>><?=$currency['FULL_NAME']?></option>
+            <?php endforeach;?>
+        </select>
+    </div>
+    <div class="ui-btn-split">
+        <button type="submit" class="ui-btn-split ui-btn-success"><?=Loc::getMessage('T_CURRENT_SUBMIT');?></button>
+    </div>
+</form>
+</div>
 
 <table class="currency-list">
     <?php if (!empty($arResult['CURRENCY'])): ?>

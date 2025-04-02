@@ -20,12 +20,25 @@ class ExchangeRate extends CBitrixComponent
                 throw new \RuntimeException(Loc::getMessage("T_EXEPTION_CURRENCY_FROM_FOUND"));
             }
 
+            $request = \Bitrix\Main\Context::getCurrent()->getRequest();
+            $this->arResult['GET'] = $request->get('CURRENCY');
+            if (!empty($this->currency)) {
+                $this->arParams['CURRENCY_FROM'] = $this->arResult['GET'];
+            }
+
+            $this->arResult['CurrencyLang'] = \Bitrix\Currency\CurrencyLangTable::getList([
+                'select' => ['CURRENCY', 'FULL_NAME'],
+                'filter' => ['LID' => LANGUAGE_ID, '!CURRENCY' => 'RUB'],
+                'order' => ['CURRENCY' => 'DESC']
+            ])->fetchAll();
+
             if ($this->startResultCache(false, [])) {
                 $rows = CurrencyRateTable::query()
                     ->where('CURRENCY', $this->arParams['CURRENCY_FROM'])
                     ->where('CURRENCY_LANG.LID', LANGUAGE_ID)
                     ->where('BASE_CURRENCY_LANG.LID', LANGUAGE_ID)
                     ->setSelect([
+                        'ID',
                         'CURRENCY',
                         'DATE_RATE',
                         'BASE_CURRENCY',
@@ -50,12 +63,13 @@ class ExchangeRate extends CBitrixComponent
                     )
                     ->exec();
 
+                $key = 1;
                 foreach ($rows as $row) {
                     $this->arResult['CURRENCY'] = $row;
                 }
 
                 $this->SetResultCacheKeys([
-                    "CURRENCY",
+                    "CURRENCY_".$this->arResult['GET'],
                 ]);
             }
 
