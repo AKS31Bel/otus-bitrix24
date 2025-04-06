@@ -26,3 +26,5 @@ CModule::AddAutoloadClasses(
 EventManager::getInstance()->AddEventHandler('main', 'OnUserTypeBuildList', ['UserTypes\FormatTelegramLink', 'GetUserTypeDescription']);
 
 EventManager::getInstance()->AddEventHandler('iblock', 'OnIBlockPropertyBuildList', ['UserTypes\IPopupWrite', 'GetUserTypeDescription']);
+
+\Bitrix\Main\UI\Extension::load(['timeman.custom']);
