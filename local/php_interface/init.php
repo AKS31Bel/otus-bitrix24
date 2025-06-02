@@ -16,6 +16,7 @@ CModule::AddAutoloadClasses(
     '', // не указываем имя модуля
     [
         'Models\\SmartPhoneTable' => '/local/app/Models/SmartPhoneTable.php',
+        'Otus\Diagnostic\Helper' => '/local/php_interface/classes/Otus/Diagnostic/Helper.php',
     ]
 );
 
@@ -27,4 +28,7 @@ EventManager::getInstance()->AddEventHandler('main', 'OnUserTypeBuildList', ['Us
 
 EventManager::getInstance()->AddEventHandler('iblock', 'OnIBlockPropertyBuildList', ['UserTypes\IPopupWrite', 'GetUserTypeDescription']);
 
-\Bitrix\Main\UI\Extension::load(['timeman.custom']);
+\Bitrix\Main\UI\Extension::load([
+    'timeman.custom',
+    'koncept.create'
+]);

@@ -45,3 +45,9 @@ BX.addCustomEvent('onTimeManWindowOpen', function () {
     popup.show();
 
 })
+
+
+BX.addCustomEvent('Crm.EntityProgress.onSaveBefore', function (value) {
+    console.log("EntityProgress", value);
+    return false
+});

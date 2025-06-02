@@ -104,6 +104,14 @@ $arUrlRewrite=array (
     'PATH' => '/desktop_app/router.php',
     'SORT' => 100,
   ),
+  142 => 
+  array (
+    'CONDITION' => '#^/disk/boards/([0-9]+)/([0-9a-zA-Z]+)#',
+    'RULE' => 'action=disk.integration.flipchart.$2&fileId=$1',
+    'ID' => NULL,
+    'PATH' => '/bitrix/services/main/ajax.php',
+    'SORT' => 100,
+  ),
   10 => 
   array (
     'CONDITION' => '#^/video([\\.\\-0-9a-zA-Z]+)(/?)([^/]*)#',

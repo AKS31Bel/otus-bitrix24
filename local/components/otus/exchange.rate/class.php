@@ -22,7 +22,7 @@ class ExchangeRate extends CBitrixComponent
 
             $request = \Bitrix\Main\Context::getCurrent()->getRequest();
             $this->arResult['GET'] = $request->get('CURRENCY');
-            if (!empty($this->currency)) {
+            if (!empty($this->arResult['GET'])) {
                 $this->arParams['CURRENCY_FROM'] = $this->arResult['GET'];
             }
 
@@ -71,9 +71,10 @@ class ExchangeRate extends CBitrixComponent
                 $this->SetResultCacheKeys([
                     "CURRENCY_".$this->arResult['GET'],
                 ]);
+                $this->includeComponentTemplate();
             }
 
-            $this->includeComponentTemplate();
+
 
         } catch (\Throwable $e) {
             echo '<pre>';
