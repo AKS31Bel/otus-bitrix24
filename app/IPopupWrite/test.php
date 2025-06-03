@@ -14,3 +14,9 @@ $count = \Models\Lists\BronPropertyValuesTable::getList([
     'count_total' => true,
 ])->fetchAll();
 dump($count);
+
+$res = \Bitrix\Iblock\Elements\ElementZayavkiTable::getList([
+    'select' => ['*'],
+    //'filter' => ['DEAL' => 13]
+])->fetch();
+dump($res);
