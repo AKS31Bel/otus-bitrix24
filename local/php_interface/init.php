@@ -1,6 +1,7 @@
 <?php
 
 use Bitrix\Main\EventManager;
+define("REST_APAUTH_ALLOW_HTTP", true);
 
 foreach ([
             __DIR__.'/../vendor/autoload.php',
@@ -21,6 +22,7 @@ CModule::AddAutoloadClasses(
 );
 
 
+
 // Повесить событие на добавление HL записи
 //\Bitrix\Main\EventManager::getInstance()->addEventHandler('', 'ColorsOnAdd', ['Otus\HL\Handlers', 'onColorAdd']);
 
@@ -32,6 +34,7 @@ EventManager::getInstance()->addEventHandler('crm', 'OnBeforeCrmDealUpdate', ['E
 // События Iblock сущности
 //EventManager::getInstance()->addEventHandler('iblock', 'OnBeforeIBlockElementUpdate', ['Events\IblockHandler', 'OnBeforeIBlockUpdateHandler']);// перед изменением информационного блока.
 EventManager::getInstance()->addEventHandler('iblock', 'OnAfterIBlockElementUpdate', ['Events\IblockHandler', 'OnAfterIBlockElementUpdate']);// перед изменением информационного блока.
+EventManager::getInstance()->addEventHandlerCompatible('rest', 'OnRestServiceBuildDescription', ['Rest\SmartPhone', 'OnRestServiceBuildDescriptionHandler']);  // для REST сервиса Смартфонов
 
 
 \Bitrix\Main\UI\Extension::load([

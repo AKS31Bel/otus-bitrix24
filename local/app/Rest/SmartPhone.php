@@ -50,6 +50,8 @@ class SmartPhone
         Helper::writeToLog($arParams, "otus.smartphone.add <arParams>");
         Helper::writeToLog($navStart, "otus.smartphone.add <navStart>");
         Helper::writeToLog($server, "otus.smartphone.add <server>");
+        if(!isset($arParams['screen_id'])) $arParams['screen_id'] = 65;
+        if(!isset($arParams['battery_id'])) $arParams['battery_id'] = 60;
 
         $status = Phones::add($arParams);
         if ($status->isSuccess()) {
@@ -81,7 +83,7 @@ class SmartPhone
         Helper::writeToLog($arParams, "otus.smartphone.list <arParams>");
         Helper::writeToLog($navStart, "otus.smartphone.list <navStart>");
 //        Helper::writeToLog($server, "otus.smartphone.list <server>");
-        $limit = 5;
+        $limit = 50;
         $offset = 0;
         if($navStart >= 1)
             $offset = $limit * ($navStart-1);
